@@ -43,7 +43,8 @@ jobs:
 
     - name: Apply DisplayLink patch
       run: |
-        cat << 'EOF' > padavan-ng/fb_udl_mips.patch
+        cd padavan-ng
+        cat > fb_udl_mips.patch <<'EOF'
 --- a/drivers/video/fb_udl.c
 +++ b/drivers/video/fb_udl.c
 @@
@@ -54,7 +55,6 @@ jobs:
 +                                       struct notifier_block *nb) { return 0; }
 +#endif
 EOF
-        cd padavan-ng
         patch -p1 < fb_udl_mips.patch
 
     - name: Enable DisplayLink in build.config
